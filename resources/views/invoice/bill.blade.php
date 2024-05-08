@@ -75,8 +75,8 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>In time</th>
-                        <th>out time</th>
+                        <th>In Time</th>
+                        <th>Out Time</th>
                         <th>Amount</th>
                     </tr>
                 </thead>
