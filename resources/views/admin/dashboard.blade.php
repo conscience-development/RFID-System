@@ -68,7 +68,7 @@
                       <div class="col-md-6 col-lg-3 mb-4">
                         <div class="card">
                           <div class="card-body">
-                            <h5 class="card-title">Number of Invoices</h5>
+                            <h5 class="card-title">Daily Invoice Count</h5>
                             <p class="card-text">{{($invoiceCount)}}</p>
                             <a href="{{ route('invoice.index') }}" class="btn btn-primary">View Invoices</a>
                           </div>
