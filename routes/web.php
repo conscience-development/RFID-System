@@ -82,6 +82,6 @@ Route::post('invoiceGenerator', [InvoiceController::class, 'invoiceGenerator'])-
 Route::get('invoice.show', [InvoiceController::class, 'invoiceShow'])->name('invoice.show');
 Route::get('invoice.bill', [InvoiceController::class, 'invoiceBill'])->name('invoice.bill');
 Route::get('invoice/preview', [InvoiceController::class, 'invoicePreview'])->name('invoice.preview');
-
+Route::get('get-status', [ChildController::class, 'getStatus'])->name('get-status');
 
 Route::post('/search/customers', [CustomerController::class, 'search'])->name('search.customers');

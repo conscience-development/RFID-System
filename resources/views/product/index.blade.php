@@ -36,7 +36,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Show Price</th>
-                        <th>Unit Price</th>
+                        <th>Sale Price</th>
                         <th>Stock Level</th>
                         <th>Description</th>
                         <th>Category</th>

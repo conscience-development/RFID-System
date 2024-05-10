@@ -18,8 +18,14 @@ class Child extends Model
         'school',
     ];
     public function customer()
-{
+    {
+        
     return $this->belongsTo(Customer::class, 'customer_id');
-}
+
+    }
+    public function lifemembers()
+    {
+        return $this->hasMany(Lifemember::class);
+    }
 
 }

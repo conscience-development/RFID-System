@@ -30,7 +30,9 @@
             <div class="card">
                 <div class="card-header">Playtime Prices</div>
                 <div class="card-body">
-                    <a href="{{ route('playtimeprices.create') }}" class="btn btn-primary mb-3">Create New Playtime Price</a>
+                    <p style="font-size: 14px">A -> Price for Kids 1 timeslot</p>
+                    <p style="font-size: 14px">B -> Price for Kids 2 timeslot</p>
+                    {{-- <a href="{{ route('playtimeprices.create') }}" class="btn btn-primary mb-3">Create New Playtime Price</a> --}}
                         {{-- {{dd($playtimePrices )}}$playtimePrices->isEmpty() --}}
                     @if ($playtimePrices->isEmpty())
                         <p>No playtime prices found.</p>

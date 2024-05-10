@@ -56,9 +56,6 @@
                                             <input type="text" id="searchBox" placeholder="Search customers...">
                                             <input type="hidden" id="customer_id"> <!-- Hidden field to store the selected customer ID -->
                                             <a href="{{ route('customer.create') }}" class="btn btn-secondary" style="margin-left: 10px;" target="_blank">+</a>
-
-
-                                            
                                         </div>
 
 
@@ -82,7 +79,7 @@
                                             </div>
                                             <div class="col">
                                                 <select class="form-control" id="childNames" class="childNames">
-
+                                                    
                                                 </select>
 
                                             </div>
@@ -93,7 +90,9 @@
                                                     <option value="Toddler">Toddler</option>
                                                 </select>
                                             </div>
-
+                                            <div class="col">
+                                                <input type="text" class="form-control" style="border: 1px solid #ced4da;"  id="status" readonly>
+                                            </div>
                                             <div class="col">
                                                 <a href="#" id="addBtn" class="btn btn-success">Add</a>
                                                 <a href="{{ route('child.create') }}" class="btn btn-secondary"   target="_blank">+</a>
@@ -186,6 +185,10 @@
 
 
         if (children && children.length > 0) {
+            var option = document.createElement("option");
+            option.value = "Select child";
+            option.textContent = "Select Child";
+            childNamesSelect.appendChild(option);
         children.forEach(child => {
             var option = document.createElement("option");
             option.value = child.id;
@@ -412,6 +415,31 @@
     // Event listener for the button click
     $(document).on('click', '#createCustomerButton', function() {
         openCreateCustomerModal();
+    });
+
+    $(document).ready(function() {
+        // On change event of the select element
+        $('#childNames').change(function() {
+            // Get the selected child ID
+            var childId = $(this).val();
+            console.log('rashan child ', childId);
+            // AJAX request to fetch status of the selected child
+            $.ajax({
+                url: '/get-status', // Endpoint to fetch status (replace with actual endpoint)
+                type: 'GET',
+                data: {
+                    child_id: childId
+                },
+                success: function(response) {
+                    // Set the fetched status to the status input field
+                    $('#status').val(response.status);
+                    console.log('seerver responce ', response)
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // Log any errors
+                }
+            });
+        });
     });
     /////////////////http://127.0.0.1:8000/invoice/generate/1h%2056m/2/11:52
 

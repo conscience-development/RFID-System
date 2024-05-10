@@ -56,7 +56,7 @@
 </head>
 <body>
     <div class="container">
-        <button onclick="window.location.href='/dashboard'">Back to Dashboard</button>
+        <button onclick="window.location.href='admin/dashboard'">Back to Dashboard</button>
         <div class="header">
             <img src="/image/bgicon.jpg" alt="Company Logo">
             <h2>House Of Play</h2>
@@ -86,7 +86,7 @@
                         <td>{{ $playtimeOrder->child_name }}</td>
                         <td>{{ $playtimeOrder->intime }}</td>
                         <td>{{ $playtimeOrder->outtime }}</td>
-                        <td>{{ $playtimeOrder->amount }}</td>
+                        <td>{{Rs . $playtimeOrder->amount }}</td>
                         <!-- Add other fields as needed -->
                     </tr>
                     @endforeach
@@ -108,7 +108,7 @@
                     <tr>
                         <td>{{ $purchaseItem->product_name }}</td>
                         <td>{{ $purchaseItem->quantity }}</td>
-                        <td>{{ $purchaseItem->amount }}</td>
+                        <td>{{Rs . $purchaseItem->amount }}</td>
                         <!-- Add other fields as needed -->
                     </tr>
                     @endforeach
@@ -116,9 +116,9 @@
             </table>
         </div>
         <div class="total-section">
-            <p><strong>Discount:</strong> {{ $invoice->discount }}</p>
-            <p><strong>Fine:</strong> {{ $invoice->fine}}</p>
-            <p><strong>Total:</strong> {{ $invoice->total }}</p>
+            <p>Discount: {{Rs . $invoice->discount }}</p>
+            <p>Fine: if applicable  {{Rs . $invoice->fine}}</p>
+            <p><strong>Total:</strong> {{Rs . $invoice->total }}</p>
 
             {{-- <p><strong>Payments:</strong> $100.00</p> --}}
         </div>

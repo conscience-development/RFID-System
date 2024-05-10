@@ -39,31 +39,38 @@
             <thead>
                 <tr>
 
-                    <th scope="col">Parent Name</th>
-                    <th scope="col">Relationship to Parent</th>
+                   
                     <th scope="col">Child Name</th>
                     <th scope="col">Date of Birth</th>
                     <th scope="col">School</th>
+                    <th scope="col">Parent Name</th>
+                    <th scope="col">Relationship to Parent</th>
+                    <th scope="col">Parent Contact</th>
                     <th scope="col">Actions</th>
-
                 </tr>
             </thead>
             <tbody>
                 @foreach ($children as $child)
                     <tr>
 
-                        <td>{{ $child->customer->name }}</td>
-                        <td>{{$child->relationship}}</td>
+                       
                         <td>{{ $child->name }}</td>
                         <td>{{ $child->DOB }}</td>
                         <td>{{ $child->school ?: 'N/A' }}</td>
-                       
+                        <td>{{ $child->customer->name }}</td>
+                        <td>{{$child->relationship}}</td>
+                        <td>{{ $child->customer->contact ?: 'N/A' }}</td>
                         <td>
                             <a href="{{ route('child.edit', $child->id) }}" class="btn btn-primary">Edit</a> <!-- Edit button -->
-                            <form action="" method="POST" style="display: inline;">
+                            {{-- <form action="" method="POST" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button> <!-- Delete button -->
+                            </form> --}}
+                            <form action="{{ route('child.destroy', $child->id) }}" method="POST" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this customer?')">Delete</button>
                             </form>
                         </td>
                     </tr>

@@ -40,15 +40,18 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="parent_id">Parent Name:</label>
-                            <select class="form-control" id="parent_id" name="parent_id" required>
+                            <label for="parent_id">Parent Name:*</label>
+                            {{-- <select class="form-control" id="parent_id" name="parent_id" required>
                                 @foreach ($customers as $customer)
                                     <option value="{{ $customer->id }}">{{ $customer->name }}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                             
+                           
+                                <input type="text" id="searchBox" placeholder="Search parents..." class="form-control">
+                                <input type="hidden" id="customer_id"> <!-- Hidden field to store the selected customer ID -->
                         </div>
-                        <div class="form-group row justify-content-center">
+                        <div class="form-group ">
                             <ul id="customerList"></ul>
                         </div>
                         <div class="form-group">
@@ -71,6 +74,7 @@
                             <label for="school">School:</label>
                             <input type="text" class="form-control" id="school" name="school">
                         </div>
+                        
                         <div class="form-group">
                             <label for="relationship">Relationship to Parent:</label>
                             <select class="form-control" id="relationship" name="relationship" >
@@ -82,6 +86,16 @@
                             </select>
                             
                         </div>
+
+                        <div class="form-group">
+                            <label for="status">LifeMember Status</label>
+                            <select class="form-control" id="status" name="status" >
+                                <option value="no">no</option>
+                                <option value="yes">yes</option>
+
+                            </select>
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Save</button>
                     </form>
                 </div>
@@ -89,6 +103,8 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script>
      // search for customer
      $(document).ready(function() {

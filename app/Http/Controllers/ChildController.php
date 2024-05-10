@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Child;
 use App\Models\Customer;
+use App\Models\Lifemember;
 use Illuminate\Http\Request;
 use App\Models\Playtimesprice;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,7 @@ class ChildController extends Controller
     }
     public function store(Request $request)
     {
-       // dd($request);
+     // dd($request);
         $validatedData = $request->validate([
             'parent_id' => 'required|integer',
             'name' => 'required|string|max:255',
@@ -27,9 +28,13 @@ class ChildController extends Controller
             'gender' => 'required|string|in:male,female',
             'school' => 'nullable|string|max:255',
             'relationship' => 'nullable|string|max:255',
+            'status' => 'required|string|max:255', 
         ]);
     
-       // dd($validatedData);
+        // dd($validatedData);
+        $lifemember= new Lifemember();
+
+
         $child = new Child();
         $child->customer_id = $validatedData['parent_id'];
         $child->name = $validatedData['name'];
@@ -38,10 +43,14 @@ class ChildController extends Controller
         $child->relationship = $validatedData['relationship'];
         $child->school = $validatedData['school'];
 
-       
-      //  dd($child); 
         $child->save();
-
+        $lastchild = Child::orderBy('id', 'desc')->first();
+       
+        $lifemember->child_id=$lastchild->id;
+        $lifemember->status=$validatedData['status'];
+       
+        $lifemember->save();
+       
         return redirect()->route('child.index')->with('success', 'Child saved successfully.');
     }
     public function index()
@@ -49,7 +58,7 @@ class ChildController extends Controller
           $children = Child::with('customer')->get();
 
 
-        return view('child.index', compact('children'));
+        return view('Child.index', compact('children'));
     }
     public function show()
     {
@@ -78,7 +87,7 @@ class ChildController extends Controller
             'relationship' => 'nullable|string|max:255',
         ]);
 
-    dd($validatedData);
+    
     
     $child = Child::findOrFail($id);
     $child->customer_id = $validatedData['parent_id'];
@@ -88,7 +97,7 @@ class ChildController extends Controller
         $child->relationship = $validatedData['relationship'];
         $child->school = $validatedData['school'];
     
-        dd($child);
+      //  dd($child);
     $child->save();
 
     return redirect()->back()->with('success', 'Child updated successfully.');
@@ -96,6 +105,7 @@ class ChildController extends Controller
 public function destroy($id)
 {
     $child = Child::findOrFail($id);
+    
     $child->delete();
 
     return redirect()->back()->with('success', 'Child deleted successfully.');
@@ -107,5 +117,15 @@ public function fetchChildren(Request $request) {
     $children = Child::where('customer_id', $customerId)->get();
    
     return response()->json($children);
+}
+public function getStatus(Request $request)
+{
+    $childId = $request->input('child_id');
+    $lifemember = Lifemember::where('child_id', $childId)->first();
+    if ($lifemember !== null) {
+        return response()->json(['status' => $lifemember->status]);
+    } else {
+        return response()->json(['status' => '']);
+    }
 }
 }
