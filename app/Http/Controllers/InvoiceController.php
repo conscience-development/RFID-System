@@ -115,9 +115,10 @@ return response()->json(['quantity'=>$quantity, 'products'=>$products]);
             }
 
         }
+        Intime::where('RFID', $rfid)->delete();
+        Outtime::where('RFID', $rfid)->delete(); 
 
-
-        return response()->json(['rfid' => $rfid ,'child' => $child ,'intime' =>$intime , 'outtime' => $outtime ,'playedtime' => $playedTime ,'amountprice' => $amountprice]);
+        return response()->json(['child' => $child ,'intime' =>$intime , 'outtime' => $outtime ,'playedtime' => $playedTime ,'amountprice' => $amountprice]);
     }
 
     public function playTimeOrder(Request $request){
@@ -129,7 +130,7 @@ return response()->json(['quantity'=>$quantity, 'products'=>$products]);
         $invoice = new Invoice;
         $invoice->customer_id = $customerId;
         $invoice->save();
-
+        
         $invoiceId = $invoice->id;
 
         if (!empty($jsonData)) {

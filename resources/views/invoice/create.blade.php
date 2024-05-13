@@ -206,6 +206,14 @@
     document.getElementById('addBtn').addEventListener('click', function(event) {
             event.preventDefault();
 
+            var addBtnRect = document.getElementById('addBtn').getBoundingClientRect();
+            var addBtnTop = addBtnRect.top + window.scrollY;
+            var addBtnLeft = addBtnRect.left + window.scrollX;
+          //  var confirmation = confirm("Are you sure you want to proceed?", addBtnLeft, addBtnTop);
+    
+    // Proceed only if the user confirms
+            // if (confirmation) {
+
             var rfid = document.getElementById('RFID').value;
              console.log('dsdsd',rfid);
              var childName = document.getElementById('childNames').value;
@@ -236,6 +244,9 @@
                 // Hide loader if needed
             }
         });
+           // } else {
+        // User canceled, do nothing
+           // }
         });
 
         function updateTable(data) {
