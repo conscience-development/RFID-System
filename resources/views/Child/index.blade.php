@@ -28,14 +28,20 @@
     </head>
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
             <h2>All Childern</h2>
         </div>
-        <div class="col-md-6 text-right">
+        <div class="col-md-3">
+            <input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search for child.."/>
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control" id="parentInput" onkeyup="parentFunction()" placeholder="Search for parent.."/>
+        </div>
+        <div class="col-md-3 text-right">
             <a href="{{ route('child.create') }}" class="btn btn-success">Add New Child</a>
         </div>
     </div>
-        <table class="table">
+        <table class="table" id="myTable">
             <thead>
                 <tr>
 
@@ -78,4 +84,52 @@
             </tbody>
         </table>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script>
+        function myFunction() {
+          // Declare variables
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          console.log(filter);
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+
+        function parentFunction() {
+          // Declare variables
+          var input, filter, table, tr, td, i, txtValue;
+          input = document.getElementById("parentInput");
+          filter = input.value.toUpperCase();
+          console.log(filter);
+          table = document.getElementById("myTable");
+          tr = table.getElementsByTagName("tr");
+
+          // Loop through all table rows, and hide those who don't match the search query
+          for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[3];
+            if (td) {
+              txtValue = td.textContent || td.innerText;
+              if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+              } else {
+                tr[i].style.display = "none";
+              }
+            }
+          }
+        }
+        </script>
 </x-app-layout>

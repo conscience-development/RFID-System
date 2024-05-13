@@ -28,6 +28,7 @@
             .no-print {
                 display: none; /* Hide elements not necessary for print */
             }
+         
         }
         /* General styling */
         body {
@@ -56,24 +57,25 @@
 </head>
 <body>
     <div class="container">
-        <button onclick="window.location.href='admin/dashboard'">Back to Dashboard</button>
+        <button class= " no-print"onclick="window.location.href='admin/dashboard'">Back to Dashboard</button>
+      <button class="no-print" onclick="window.print()">Print</button>
         <div class="header">
             <img src="/image/bgicon.jpg" alt="Company Logo">
-            <h2>House Of Play</h2>
-            <p>Lake Road,Boaralesgamuwa</p>
-            <p>Company Telephone</p>
-            <p><strong></strong> "Thank you for choosing us."</p>
+            <h2 style="font-size:12px">House Of Play</h2>
+            <p style="font-size:10px">Lake Road,Boaralesgamuwa</p>
+            <p style="font-size:10px">Company Telephone</p>
+            <p style="font-size:10px"><strong></strong> "Thank you for choosing us."</p>
         </div>
         <div class="invoice-details">
-            <p><strong>Invoice ID:</strong> {{ $invoice->id }}</p>
-            <p><strong>Customer Name:</strong> {{$customerName}}</p>
+            <p style="font-size:12px"><strong>Invoice ID:</strong> {{ $invoice->id }}</p>
+            <p style="font-size:12px"><strong>Customer Name:</strong> {{$customerName}}</p>
         </div>
 
         <div class="playtime-order">
-            <h3>Playtime Order</h3>
+            <h3 style="font-size:12px">Playtime </h3>
             <table class="table">
                 <thead>
-                    <tr>
+                    <tr style="font-size:12px">
                         <th>Name</th>
                         <th>In Time</th>
                         <th>Out Time</th>
@@ -82,11 +84,11 @@
                 </thead>
                 <tbody>
                     @foreach ($playtimeOrders as $playtimeOrder)
-                    <tr>
+                    <tr style="font-size:12px">
                         <td>{{ $playtimeOrder->child_name }}</td>
                         <td>{{ $playtimeOrder->intime }}</td>
                         <td>{{ $playtimeOrder->outtime }}</td>
-                        <td>{{Rs . $playtimeOrder->amount }}</td>
+                        <td>{{ $playtimeOrder->amount }}</td>
                         <!-- Add other fields as needed -->
                     </tr>
                     @endforeach
@@ -94,10 +96,10 @@
             </table>
         </div>
         <div class="purchase-order">
-            <h3>Purchase Order</h3>
+            <h3 style="font-size:12px">Other Product</h3>
             <table class="table">
                 <thead>
-                    <tr>
+                    <tr style="font-size:12px">
                         <th>Product Name</th>
                         <th>Qty</th>
                         <th>Amount</th>
@@ -105,10 +107,10 @@
                 </thead>
                 <tbody>
                     @foreach ($purchaseItems as $purchaseItem)
-                    <tr>
+                    <tr style="font-size:12px">
                         <td>{{ $purchaseItem->product_name }}</td>
                         <td>{{ $purchaseItem->quantity }}</td>
-                        <td>{{Rs . $purchaseItem->amount }}</td>
+                        <td>{{ $purchaseItem->amount }}</td>
                         <!-- Add other fields as needed -->
                     </tr>
                     @endforeach
@@ -116,9 +118,9 @@
             </table>
         </div>
         <div class="total-section">
-            <p>Discount: {{Rs . $invoice->discount }}</p>
-            <p>Fine: if applicable  {{Rs . $invoice->fine}}</p>
-            <p><strong>Total:</strong> {{Rs . $invoice->total }}</p>
+            <p style="font-size:12px">Discount: Rs{{ $invoice->discount }}</p>
+            <p style="font-size:12px">Fine (if applicable):Rs {{ $invoice->fine}}</p>
+            <p style="font-size:12px"><strong>Grand Total :</strong> Rs {{ $invoice->total }}</p>
 
             {{-- <p><strong>Payments:</strong> $100.00</p> --}}
         </div>
